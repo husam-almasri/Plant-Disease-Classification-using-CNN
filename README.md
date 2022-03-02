@@ -1,20 +1,17 @@
 # Plant Disease Classification using CNN:
 
 ## Table of Content
-  * [Demo](#demo)
   * [Overview](#overview)
   * [Installation](#installation)
   * [Directory Tree](#directory-tree)
-  * [Future scope of project](#future-scope)
+  * [Future scope](#future-scope)
 
-
-## Demo
 
 ### Website screenshot:
-![](/images/screencapture-homepage.JPG)
+![](/images/screencapture-homepage.png)
 
 ### Screenshot of the results:
-![](/images/screencapture-results.JPG)
+![](/images/screencapture-results.png)
 
 ## Overview
 This is an end-to-end deep learning project in the agriculture domain. Farmers every year face economic loss and crop waste due to various diseases in plants. I will use image classification using CNN and built a testpad website using which a farmer can take a picture and the website will tell him if the plant has a disease or not.
@@ -38,7 +35,7 @@ In this project, I will let the tf serving handle the 3 models, each prepared fo
 
 The fourth component is the website built in HTML5, CSS3, and JavaScript that allows the user to select which kind of vegetable he wants to check and add a leaf image for the selected plant. The website will call python FastAPI server which, in turn, calls the related model from tf serving to perform the inference.
 
-![](/images/Workflow-chart.PNG)
+![](/images/Workflow-chart.png)
 
 Technology and tools used in this project:
 - Python
@@ -54,8 +51,11 @@ Technology and tools used in this project:
 
 ## Installation
 The Code is written in Python 3.9.10. If you don't have Python installed you can find it [here](https://www.python.org/downloads/). To install the required packages and libraries, run this command in the project directory after [cloning](https://www.howtogeek.com/451360/how-to-clone-a-github-repository/) the repository:
-```bash
+
+```
+bash
 pip install -r requirements.txt
+```
 
 ### Running the API
 
@@ -63,13 +63,15 @@ pip install -r requirements.txt
 
 1. Get inside `api` folder
 
-```bash
+```
+bash
 cd api
 ```
 
 2. Run the FastAPI Server using uvicorn
 
-```bash
+```
+bash
 uvicorn main:app --reload --host 0.0.0.0
 ```
 
@@ -79,67 +81,70 @@ uvicorn main:app --reload --host 0.0.0.0
 
 1. Get inside `api/tf_serving_as_multimodels` folder
 
-```bash
+```
+bash
 cd api/tf_serving_as_multimodels
 ```
 
 2. Update the paths in `models.config` file.
 3. Run the TF Serve (Update config file path below)
 
-```bash
+```
+bash
 docker run -t --rm -p 8501:8501 -v C:/projects/plant_disease_classification/plant_disease_classification/:/plant_disease_clf tensorflow/serving --rest_api_port=8501 --allow_version_labels_for_unavailable_models=true --model_config_file=plant_disease_clf/api/tf_serving_as_multimodels/models.config
 ```
 
 4. Run the FastAPI Server using uvicorn
    For this you can directly run it from your main.py or main-tf-serving.py using pycharm run option, OR you can run it from command prompt as shown below,
 
-```bash
+```
+bash
 uvicorn main-tf-serving:app --reload --host 0.0.0.0
 ```
 
 5. Your API is now running at `0.0.0.0:8000`
 
-```
 
-## Directory Tree 
+## Directory Tree
+
 ```
-‎| README.md‎
-‎| api‎
-‎| | requirements.txt‎
-‎| +---fastapi
-‎| | main.py‎
-‎| +---tf_serving_as_multimodels
-‎| | docker command.txt‎
-‎| | main-tf-serving.py
-‎| | models.config‎
-‎| frontend
-‎| | index.html‎
-‎| | main.css‎
-‎‎| | main.js‎
-‎‎| | main_img.jpg‎
-‎‎| | pepper_img.jpg‎
-‎‎| | Potato_img.jpg‎
-‎‎| | tomato_img.jpg‎
-‎| images
-‎‎| | screencapture-homepage.png
-‎| | creencapture-results.png
-‎| | workflow-chart.png
-‎|  training
-‎| | PDC.ipynb
-‎| | PDC_ImageDataGenerator.ipynb
-‎|  saved_models
-‎| +---fastapi
-‎| | +---pepper_PDC_ImageDataGenerator‎
-‎| | +---potato_PDC_ImageDataGenerator‎
-‎| | \---tomato_PDC_ImageDataGenerator‎
-‎| \---tf-serving
-‎|   +---models
-‎|   | +---pepper_PDC_ImageDataGenerator‎
-‎|   | +---potato_PDC_ImageDataGenerator‎
-‎|   | \---tomato_PDC_ImageDataGenerator
+| README.md
+| api
+| | requirements.txt
+| +---fastapi
+| | main.py
+| +---tf_serving_as_multimodels
+| | docker command.txt
+| | main-tf-serving.py
+| | models.config
+| frontend
+| | index.html
+| | main.css
+| | main.js
+| | main_img.jpg
+| | pepper_img.jpg
+| | Potato_img.jpg
+| | tomato_img.jpg
+| images
+| | screencapture-homepage.png
+| | creencapture-results.png
+| | workflow-chart.png
+|  training
+| | PDC.ipynb
+| | PDC_ImageDataGenerator.ipynb
+|  saved_models
+| +---fastapi
+| | +---pepper_PDC_ImageDataGenerator
+| | +---potato_PDC_ImageDataGenerator
+| | \---tomato_PDC_ImageDataGenerator
+| \---tf-serving
+|   +---models
+|   | +---pepper_PDC_ImageDataGenerator
+|   | +---potato_PDC_ImageDataGenerator
+|   | \---tomato_PDC_ImageDataGenerator
 ``` 
 
-## Future Scope
+## Future scope
 
 * Add more types of vegetables and fruits.
 * Model Optimization: Quantization, Tensorflow lite
