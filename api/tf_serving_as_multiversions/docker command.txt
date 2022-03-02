@@ -1,0 +1,1 @@
+docker run -t --rm -p 8501:8501 -v C:/projects/plant_disease_classification/plant_disease_classification/:/plant_disease_clf tensorflow/serving --rest_api_port=8501 --allow_version_labels_for_unavailable_models=true --model_config_file=plant_disease_clf/api/tf_serving_as_multiversions/models.config
